@@ -1,7 +1,8 @@
 import Slider from './SliderBanner';
 import Collection from './Collection';
+import { useState } from 'react';
 
-function Main(){
+function Main(props){
 
     //Todo  아래 테스트값 API와 연결하기
     const testVal =[
@@ -10,12 +11,18 @@ function Main(){
                     {backdrop_path : "TEST THUMNAIL-3.png", title: "테스트북마크에대한제목3", from: "테스트출처3"}
                 ]
 
+    //state에 따라서 메인배너,검색창,출력 visible을 조정한다
+    const defaultMain = 'main';
+    const [isMain, setisMain]  = useState(props.isMain || defaultMain);
+
     return(
     <div>
-        <Slider />
-        <div className='relative flex items-center'>
+        {isMain ==='main' && <Slider/>}
+        {isMain ==='userMain' 
+            && 
             <Collection results={testVal}/>
-        </div>
+            //todo 여기에 중간위치하는 검색창 넣기
+        }
     </div>
     );
 }

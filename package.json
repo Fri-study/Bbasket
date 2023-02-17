@@ -13,7 +13,7 @@
     "i": "^0.3.7",
     "iconv-lite": "^0.6.3",
     "node-polyfill-webpack-plugin": "^2.0.1",
-    "puppeteer": "^19.7.0",
+    "puppeteer": "^19.7.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-responsive-carousel": "^3.2.23",

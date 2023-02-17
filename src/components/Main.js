@@ -1,5 +1,6 @@
 import Slider from './SliderBanner';
 import Collection from './Collection';
+import SearchBar from './SearchBar';
 import { useState } from 'react';
 
 function Main(props){
@@ -17,12 +18,28 @@ function Main(props){
 
     return(
     <div>
-        {isMain ==='main' && <Slider/>}
-        {isMain ==='userMain' 
+        {/* 기본메인화면 진입시 */}
+        {isMain ==='main' 
             && 
-            <Collection results={testVal}/>
-            //todo 여기에 중간위치하는 검색창 넣기
+            <div className='inline-block items-center'>
+                <div className='w-[800px]'>
+                    <Slider/>
+                </div>
+                <div className='mt-[70px] mb-[150px] self-center'>
+                    <SearchBar/>
+                </div>
+
+                {/*todo  설명이미지가 들어갈만한 자리에 샘플가안 박스 */}
+                {/* <div className='mt-[50px] border-2 bg-slate-400 h-[400px] '> 사용 설명, 플랫폼 설명 이미지가 들어가면 좋겠어요 </div> */}
+            </div>
         }
+
+        {/* 유저메인화면 진입시 */}
+        {isMain ==='userMain' && <Collection results={testVal}/>}
+
+        {/* 검색화면 진입시 */}
+
+
     </div>
     );
 }

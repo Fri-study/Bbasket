@@ -1,8 +1,9 @@
 import "../componentsCss/addBookMark.css";
-import React, { useState, useEffect } from "react";
-import axios, { Axios } from "axios";
+import React, { useState,} from "react";
+import axios from "axios";
 import isEmpty from './Common/CommonFuntion'
 const cheerio = require("cheerio");
+let innerResponseCh = true;
 
 function AddBookMark(){
 
@@ -49,7 +50,6 @@ function AddBookMark(){
 
         try {
             const response = await axios.get(requestUrl);
-            setOkrespons(true);
             
             const $ = cheerio.load(response.data);
             let scrapedTitle = $('[property="og:title"]').attr('content');
@@ -74,6 +74,7 @@ function AddBookMark(){
             add("scrapedTitle",scrapedTitle);
             add("scrapedAuthor", scrapedAuthor);
             add("scrapedImg", scrapedImg);
+            if(innerResponseCh)setOkrespons(true);
 
           } catch (error) {
             console.error(error);
@@ -157,8 +158,8 @@ function NaverAddProxy(url){
 
 //iframe이 있는경우 그 안의 주소에 접근한다
 async function Iframescraping(isIframe, alreadySetProxy ){
-    const [okiframeResponse, setOkiframeResponse] = useState(false);
 
+    innerResponseCh = false;
     let iframeURL = isIframe[0];
     iframeURL = iframeURL.attribs.src;
     let newIframeMap = new Map();
@@ -167,7 +168,6 @@ async function Iframescraping(isIframe, alreadySetProxy ){
 
     try{
         const secondResponse = await axios.get(iframeURL);
-        setOkiframeResponse(true);
         const $iframeData = cheerio.load(secondResponse.data);
 
         let scrapedTitle = $iframeData('[property="og:title"]').attr('content');
@@ -184,6 +184,7 @@ async function Iframescraping(isIframe, alreadySetProxy ){
         newIframeMap.set("scrapedTitle", scrapedTitle);
         newIframeMap.set("scrapedAuthor", scrapedAuthor);
         newIframeMap.set("scrapedImg", scrapedImg);
+        innerResponseCh = true;
     } catch (error) {
         console.error(error);
     }

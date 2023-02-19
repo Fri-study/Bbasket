@@ -23,7 +23,8 @@ function App() {
       <header>
       </header>
       <main>
-        {showState ==='main' || showState == 'usermain' ? <Main isMain={showState}/> : null}
+        {showState ==='main' || showState === 'usermain' || showState === 'searchmain'
+          ? <Main isMain={showState}/> : null}
       </main>
       <footer></footer>
     </div>

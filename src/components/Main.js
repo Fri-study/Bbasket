@@ -1,9 +1,11 @@
 import Slider from './SliderBanner';
 import Collection from './Collection';
 import SearchBar from './SearchBar';
+import SearchMain from './SearchMain';
 import { useState } from 'react';
 
 function Main(props){
+
 
     //Todo  아래 테스트값 API와 연결하기
     const testVal =[
@@ -14,19 +16,32 @@ function Main(props){
 
     //state에 따라서 메인배너,검색창,출력 visible을 조정한다
     const defaultMain = 'main';
-    const [isMain, setisMain]  = useState(props.isMain || defaultMain);
+    const [state, setState] = useState({ isMain: props.isMain || defaultMain , isShow: "beforeSearch" });
+
+    //메인화면에서 검색이 일어나는경우, 메인검색창으로 visible을 조정한다
+    const changtoSearch = () =>{
+        setState({isMain : "searchmain", isShow: "afterSearch"});
+    }
+
+    //todo 검색API는 메인 이곳에서 처리하는게 좋지 않을까?
+    const handleSearching = (searchTerm) =>{
+        if(state.isMain === 'main') changtoSearch();
+
+        forSearching(searchTerm);
+    }
+
 
     return(
     <div>
         {/* 기본메인화면 진입시 */}
-        {isMain ==='main' 
+        {state.isMain ==='main' 
             && 
             <div className='inline-block items-center'>
                 <div className='w-[800px]'>
                     <Slider/>
                 </div>
                 <div className='mt-[70px] mb-[150px] self-center'>
-                    <SearchBar/>
+                    <SearchBar onSerchActed={handleSearching} isMain={state.isMain} isShow={state.isShow}/>
                 </div>
 
                 {/*todo  설명이미지가 들어갈만한 자리에 샘플가안 박스 */}
@@ -35,13 +50,20 @@ function Main(props){
         }
 
         {/* 유저메인화면 진입시 */}
-        {isMain ==='usermain' && <Collection results={testVal}/>}
+        {state.isMain ==='usermain' && <Collection isMain={state.isMain} results={testVal}/>}
 
         {/* 검색화면 진입시 */}
-
+        {state.isMain ==='searchmain' && <SearchMain isMain={state.isMain} isShow={state.isShow} results={testVal} onSerchActed={handleSearching}/>}
 
     </div>
     );
 }
 
 export default Main;
+
+
+//검색을 처리하는 함수
+function forSearching (searchTerm){
+
+    console.log('여기서 API통신을 해야죠 : '+ searchTerm);
+}

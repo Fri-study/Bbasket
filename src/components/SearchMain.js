@@ -1,6 +1,7 @@
 import SearchBar from "./SearchBar";
 import Collection from "./Collection";
 import { useState } from 'react';
+import isEmpty from './Common/CommonFuntion';
 
 function SearchMain(props){
 
@@ -33,7 +34,21 @@ function SearchMain(props){
             {isShow === 'afterSearch' 
                 &&
                 <div className='mt-[30px] mb-[150px] self-center'>
-                <SearchBar onSerchActed={handleSearching}  isMain={props.isMain} isValue={props.isValue}/>
+                    <SearchBar onSerchActed={handleSearching}  isMain={props.isMain} isValue={props.isValue}/>
+
+                    {!isEmpty(props.results) 
+                    && 
+                        <div className="m-[20px] mt-[40px]">
+                        <Collection results={props.results}/>
+                        </div>
+                    }
+                    {isEmpty(props.results)
+                    &&
+                        <div className=" mt-[50px]">
+                            <span className="text-sky-600">죄송합니다 검색 결과가 없습니다</span>
+                        </div>
+                    }
+
                 </div>
             }
 

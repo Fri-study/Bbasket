@@ -1,15 +1,11 @@
-import './App.css';
-import Main from './components/Main';
+import "./App.css";
+import LoginForm from "./components/loginpage/LoginForm";
+// import Main from "./components/Main";
 
 function App() {
   return (
     <div className="App">
-      <header>
-      </header>
-      <main>
-        <Main/>
-      </main>
-      <footer></footer>
+      <LoginForm />
     </div>
   );
 }

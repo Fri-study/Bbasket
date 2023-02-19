@@ -33,7 +33,7 @@ function SearchMain(props){
             {isShow === 'afterSearch' 
                 &&
                 <div className='mt-[30px] mb-[150px] self-center'>
-                <SearchBar onSerchActed={handleSearching}  isMain={props.isMain}/>
+                <SearchBar onSerchActed={handleSearching}  isMain={props.isMain} isValue={props.isValue}/>
                 </div>
             }
 

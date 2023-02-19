@@ -13,21 +13,20 @@ function Main(props){
                     {backdrop_path : "TEST THUMNAIL-2.png", title: "테스트북마크에대한제목2", from: "테스트출처2"},
                     {backdrop_path : "TEST THUMNAIL-3.png", title: "테스트북마크에대한제목3", from: "테스트출처3"}
                 ]
-
+                
     //state에 따라서 메인배너,검색창,출력 visible을 조정한다
     const defaultMain = 'main';
-    const [state, setState] = useState({ isMain: props.isMain || defaultMain , isShow: "beforeSearch" });
+    const [state, setState] = useState({ isMain: props.isMain || defaultMain , isShow: "beforeSearch" , isValue : "" });
 
     //메인화면에서 검색이 일어나는경우, 메인검색창으로 visible을 조정한다
-    const changtoSearch = () =>{
-        setState({isMain : "searchmain", isShow: "afterSearch"});
+    const changtoSearch = (searchTerm) =>{
+        setState({isMain : "searchmain", isShow: "afterSearch", isValue : searchTerm});
     }
 
     //todo 검색API는 메인 이곳에서 처리하는게 좋지 않을까?
     const handleSearching = (searchTerm) =>{
-        if(state.isMain === 'main') changtoSearch();
 
-        forSearching(searchTerm);
+        forSearching(searchTerm, () =>{state.isMain === 'main' && changtoSearch(searchTerm) });
     }
 
 
@@ -53,7 +52,7 @@ function Main(props){
         {state.isMain ==='usermain' && <Collection isMain={state.isMain} results={testVal}/>}
 
         {/* 검색화면 진입시 */}
-        {state.isMain ==='searchmain' && <SearchMain isMain={state.isMain} isShow={state.isShow} results={testVal} onSerchActed={handleSearching}/>}
+        {state.isMain ==='searchmain' && <SearchMain isMain={state.isMain} isShow={state.isShow} results={testVal} onSerchActed={handleSearching} isValue={state.isValue}/>}
 
     </div>
     );
@@ -63,7 +62,8 @@ export default Main;
 
 
 //검색을 처리하는 함수
-function forSearching (searchTerm){
+function forSearching (searchTerm, callback){
 
     console.log('여기서 API통신을 해야죠 : '+ searchTerm);
+    callback();
 }

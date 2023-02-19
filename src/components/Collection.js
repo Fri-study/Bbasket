@@ -4,9 +4,9 @@
  function Collection({results}){
 
     return (
-        <div className='relative flex items-center'>
+        <div className='relative items-center flex flex-wrap'>
             {results.map((val) => (
-                <div key={val.title} className='w-[160px] sm:w-[200px] md:w-[240px] lg:w-[280px] inline-block cursor-point relative p-2
+                <div key={val.title} className='w-full sm:w-1/2 md:w-1/3 lg:w-1/4 inline-block cursor-point relative p-2
                 rounded-[4px] hover:bg-sky-300 hover:opacity-80'>
                     <Thumbnail backdrop_path={val.backdrop_path} title={val.title} />
                     <div>

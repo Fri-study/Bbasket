@@ -11,11 +11,18 @@ function Main(props){
     const testVal =[
                     {backdrop_path : "TEST THUMNAIL.png", title: "테스트북마크에대한제목1", from: "테스트출처1"},
                     {backdrop_path : "TEST THUMNAIL-2.png", title: "테스트북마크에대한제목2", from: "테스트출처2"},
+                    {backdrop_path : "TEST THUMNAIL-3.png", title: "테스트북마크에대한제목3", from: "테스트출처3"},
+                    {backdrop_path : "TEST THUMNAIL.png", title: "테스트북마크에대한제목1", from: "테스트출처1"},
+                    {backdrop_path : "TEST THUMNAIL-2.png", title: "테스트북마크에대한제목2", from: "테스트출처2"},
+                    {backdrop_path : "TEST THUMNAIL-3.png", title: "테스트북마크에대한제목3", from: "테스트출처3"},
+                    {backdrop_path : "TEST THUMNAIL.png", title: "테스트북마크에대한제목1", from: "테스트출처1"},
+                    {backdrop_path : "TEST THUMNAIL-2.png", title: "테스트북마크에대한제목2", from: "테스트출처2"},
                     {backdrop_path : "TEST THUMNAIL-3.png", title: "테스트북마크에대한제목3", from: "테스트출처3"}
                 ]
                 
     //state에 따라서 메인배너,검색창,출력 visible을 조정한다
     const defaultMain = 'main';
+    //const defaultMain = 'main';
     const [state, setState] = useState({ isMain: props.isMain || defaultMain , isShow: "beforeSearch" , isValue : "" });
 
     //메인화면에서 검색이 일어나는경우, 메인검색창으로 visible을 조정한다
@@ -49,7 +56,12 @@ function Main(props){
         }
 
         {/* 유저메인화면 진입시 */}
-        {state.isMain ==='usermain' && <Collection isMain={state.isMain} results={testVal}/>}
+        {state.isMain ==='usermain' 
+        && 
+            <div className='m-[20px] mt-[70px]'>
+                <Collection isMain={state.isMain} results={testVal}/>
+            </div>
+        }
 
         {/* 검색화면 진입시 */}
         {state.isMain ==='searchmain' && <SearchMain isMain={state.isMain} isShow={state.isShow} results={testVal} onSerchActed={handleSearching} isValue={state.isValue}/>}

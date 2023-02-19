@@ -1,0 +1,28 @@
+.mANDp1{
+    margin: 4px;
+    padding: 4px;
+}
+
+.roundOneInput{
+    width: 384px;
+    height: 36px;
+    border-radius: 4px;
+}
+
+.s_btn{
+    width: 64px;
+    height: 36px;
+    box-sizing: border-box;
+    appearance: none;
+    background-color: transparent;
+    border: 2px solid white;
+    border-radius: 0.6em;
+    color:white;
+    cursor: pointer;
+    align-self: center;
+}
+
+.s_btn:hover {
+    background: rgba(2,126,251,1);
+    border: 0px;
+ }

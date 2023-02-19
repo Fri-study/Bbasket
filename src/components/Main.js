@@ -17,7 +17,7 @@ function Main(props){
                     {backdrop_path : "TEST THUMNAIL-3.png", title: "테스트북마크에대한제목3", from: "테스트출처3"},
                     {backdrop_path : "TEST THUMNAIL.png", title: "테스트북마크에대한제목1", from: "테스트출처1"},
                     {backdrop_path : "TEST THUMNAIL-2.png", title: "테스트북마크에대한제목2", from: "테스트출처2"},
-                    {backdrop_path : "TEST THUMNAIL-3.png", title: "테스트북마크에대한제목3", from: "테스트출처3"}
+                    {backdrop_path : "TEST THUMNAIL-3.png", title: "테스트북마크에대한제목3", from: "테스트출처3"},
                 ]
                 
     //state에 따라서 메인배너,검색창,출력 visible을 조정한다
@@ -42,12 +42,17 @@ function Main(props){
         {/* 기본메인화면 진입시 */}
         {state.isMain ==='main' 
             && 
-            <div className='inline-block items-center'>
-                <div className='w-[800px]'>
-                    <Slider/>
+            <div>
+                <div className='flex justify-center'>
+                    <div className='w-3/4 self-center'>
+                        <Slider/>
+                    </div>
                 </div>
-                <div className='mt-[70px] mb-[150px] self-center'>
-                    <SearchBar onSerchActed={handleSearching} isMain={state.isMain} isShow={state.isShow}/>
+
+                <div className='flex justify-center'>
+                    <div className='mt-[70px] mb-[150px] self-center w-1/2'>
+                        <SearchBar onSerchActed={handleSearching} isMain={state.isMain} isShow={state.isShow}/>
+                    </div>
                 </div>
 
                 {/*todo  설명이미지가 들어갈만한 자리에 샘플가안 박스 */}

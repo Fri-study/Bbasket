@@ -27,7 +27,7 @@ function SearchBar(props){
     return (
             <div>
                 <input 
-                    className="rounded-md w-[400px] h-[38px] bg-white border-2 text-center"
+                    className="rounded-md w-4/5 h-[38px] bg-white border-2 text-center"
                     id="mainsearchInput" type="text" placeholder="검색어를 입력하세요" defaultValue={searchVal} onChange={handleSearchValChg}/>
                 <button 
                     onClick={handleSearchButtonOnClick}

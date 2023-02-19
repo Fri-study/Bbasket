@@ -35,7 +35,7 @@ function Main(props){
         }
 
         {/* 유저메인화면 진입시 */}
-        {isMain ==='userMain' && <Collection results={testVal}/>}
+        {isMain ==='usermain' && <Collection results={testVal}/>}
 
         {/* 검색화면 진입시 */}
 

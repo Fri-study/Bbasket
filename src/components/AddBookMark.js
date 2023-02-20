@@ -86,6 +86,8 @@ function AddBookMark(){
 
     //todo 2. API와 연결할수있게
     //todo 3. 플렉시블하게 (기능완성후에 할것)
+    //todo 동적 셀렉트박스 옵션
+    //todo 이미지 부분 전처리
     return (
         <form> 
         <div className=" w-[850px] h-96 bg-sky-300 m-1 p-2 rounded-md flex flex-wrap">               
@@ -97,7 +99,9 @@ function AddBookMark(){
                 <div id="addBookMarkLeftDiv">
                     <div className="place-content-start items-start flex w-[600px] h-36">                        
                         <div id="theThumbnailDiv" className="w-48 h-28 bg-white m-1 mt-3 rounded-md inline-block">
-                            <img id="theThumbnailImg" className="w-48 h-28 rounded-md" src={okRespons ? data.get("scrapedImg") || '' : ""} alt=""/>
+                            {okRespons 
+                            && <img id="theThumbnailImg" className="w-48 h-28 rounded-md" src={okRespons ? data.get("scrapedImg") || '' : ""} alt=""/>
+                            }
                         </div>
                         <div className="w-96 h-24 inline-block text-left">
                             <input id="theTitle" className="roundOneInput mANDp1  inline" placeholder="원문제목" defaultValue={okRespons ? data.get("scrapedTitle")|| '' : ''}/>

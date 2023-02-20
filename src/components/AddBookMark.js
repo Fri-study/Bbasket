@@ -59,6 +59,18 @@ function AddBookMark(){
             if(isEmpty(scrapedAuthor))scrapedAuthor = $('title').text().replace(/<[^>]*>?/gm, '');;
 
             let scrapedImg = $('img').attr('src');
+            let scrapedTags = $('div.tags > a').map(function() {
+                return $(this).text();
+              }).get();
+
+            //태그는 해시태그를 추가한다
+            let hashtaggedTags = scrapedTags.map(tag => {
+                if (tag.startsWith('#')) {
+                  return tag;
+                } else {
+                  return `#${tag}`;
+                }
+              }).join(' ');
 
             //iframe 화면이라면 내부 url의 것을 가져온다
             let isIframe = $('iframe');
@@ -74,6 +86,7 @@ function AddBookMark(){
             add("scrapedTitle",scrapedTitle);
             add("scrapedAuthor", scrapedAuthor);
             add("scrapedImg", scrapedImg);
+            add("scrapedTags", hashtaggedTags);
             if(innerResponseCh)setOkrespons(true);
 
           } catch (error) {
@@ -106,7 +119,8 @@ function AddBookMark(){
                         <div className="w-96 h-24 inline-block text-left">
                             <input id="theTitle" className="roundOneInput mANDp1  inline" placeholder="원문제목" defaultValue={okRespons ? data.get("scrapedTitle")|| '' : ''}/>
                             <input id="theAuthor" className="roundOneInput mANDp1 inline" placeholder="원문출처" defaultValue={okRespons ? data.get("scrapedAuthor")|| '' : ''}/>
-                            <textarea id="theTags" className="w-96 h-12 mANDp1 rounded-md" type="textarea"  placeholder="#태그"/>
+                            <textarea id="theTags" className="w-96 h-12 mANDp1 rounded-md" type="textarea"  placeholder="#태그" 
+                                defaultValue={okRespons ? data.get("scrapedTags")|| '' : ''}/>
                         </div>
                     </div>
                     <div className="block">

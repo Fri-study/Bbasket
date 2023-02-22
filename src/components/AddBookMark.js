@@ -1,16 +1,27 @@
 import "../componentsCss/addBookMark.css";
-import React, { useState,} from "react";
+import React, { useState, useEffect} from "react";
 import axios from "axios";
 import isEmpty from './Common/CommonFuntion'
 const cheerio = require("cheerio");
 let innerResponseCh = true;
-
+//todo 브런치 사이트 , 동적사이트 크롤링 이슈
 function AddBookMark(){
 
     const [inputURLvalue, setInputURLvale]  = useState("");
     const [data, setData] = useState("");
     const [okRespons,setOkrespons] = useState(false);
+    const [optionData, setoptionData] = useState([]);
     
+//셀렉트박스옵션값이 없는 경우(첫진입)에만 API통신을 한다
+    //todo API통신 여기서 일어남
+    async function fetchOptions() {
+        //테스트값
+        const testVal = [[{'test1' :'테스트폴더명'}, {'test2' : '테스트폴더명2'}], [{'open':'전체공개'}, {'priv' : '비공개'}]];  
+        setoptionData(testVal);
+    }
+    useEffect(() => {
+        fetchOptions();
+    }, []);
 
     //url값이 바뀔때마다 확인
     const urlValueChangeHeandler = (event) => {
@@ -28,7 +39,6 @@ function AddBookMark(){
     const urlKeyDownhandle = (event) =>{
         if(event.key === 'Enter' ) SearchURLHandler();
     }
-    
 
     //버튼 onClick이벤트
     const SearchURLHandler = async () => {
@@ -130,12 +140,25 @@ function AddBookMark(){
             
             <div id="addBookMarkRightDiv" className="w-[200px] h-[280px] rounded-md bg-slate-100">
                 <p className="mANDp1">폴더선택</p>
-                <select id="userFolderSelect" className="h-[26px] w-[100px] mANDp1">
-                    <option>테스트옵션</option>
+                <select id="userFolderSelect" className="h-[26px] w-[120px] mANDp1">
+                    { !isEmpty(optionData) 
+                        && 
+                        optionData[0].map((map, index) => {
+                        const key = Object.keys(map)[0];
+                        const value = map[key]; 
+                        return <option key={index} value={key}>{value}</option>;
+                    })}
+                    
                 </select>
                 <p className="mANDp1">공개선택</p>
-                <select id="userFolderSelect" className="h-[26px] w-[100px] mANDp1">
-                    <option>테스트옵션^^*</option>
+                <select id="userFolderSelect" className="h-[26px] w-[120px] mANDp1">
+                { !isEmpty(optionData) 
+                        && 
+                        optionData[1].map((map, index) => {
+                        const key = Object.keys(map)[0];
+                        const value = map[key]; 
+                        return <option key={index} value={key}>{value}</option>;
+                    })}
                 </select>
             </div>  
         </div>

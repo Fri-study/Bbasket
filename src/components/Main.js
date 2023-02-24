@@ -49,7 +49,7 @@ function Main(props){
     Modal.setAppElement('#root');
 
 
-    return(
+  return (
     <div>
         {/* 기본메인화면 진입시 */}
         {state.isMain ==='main' 
@@ -98,11 +98,10 @@ function Main(props){
         {state.isMain ==='searchmain' && <SearchMain isMain={state.isMain} isShow={state.isShow} results={testVal} onSerchActed={handleSearching} isValue={state.isValue}/>}
 
     </div>
-    );
+  );
 }
 
 export default Main;
-
 
 //검색을 처리하는 함수
 function forSearching (searchTerm, callback){
@@ -110,3 +109,4 @@ function forSearching (searchTerm, callback){
     console.log('여기서 API통신을 해야죠 : '+ searchTerm);
     callback();
 }
+

@@ -170,6 +170,7 @@ function AddBookMark(){
 export default AddBookMark;
 
 
+
 //네이버블로그는 내부? 프록시를 사용한다
 function NaverAddProxy(url){
 
@@ -232,3 +233,4 @@ async function Iframescraping(isIframe, alreadySetProxy ){
     return newIframeMap;
 
 }
+

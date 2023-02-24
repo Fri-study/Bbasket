@@ -1,23 +1,25 @@
-const { createProxyMiddleware } = require("http-proxy-middleware");
+const { createProxyMiddleware } = require('http-proxy-middleware');
 
-module.exports = function (app) {
+module.exports = function(app){
   app.use(
-    createProxyMiddleware("/mnaver", {
-      target: "https://m.blog.naver.com",
+    createProxyMiddleware('/mnaver', {
+      target: 'https://m.blog.naver.com',
       pathRewrite: {
-        "^/naver": "",
+        '^/naver':''
       },
-      changeOrigin: true,
+      changeOrigin: true
     })
-  );
-
+  )
+  
   app.use(
-    createProxyMiddleware("/naver", {
-      target: "https://blog.naver.com",
+    createProxyMiddleware('/naver', {
+      target: 'https://blog.naver.com',
       pathRewrite: {
-        "^/naver": "",
+        '^/naver':''
       },
-      changeOrigin: true,
+      changeOrigin: true
     })
-  );
+  )
+  
 };
+

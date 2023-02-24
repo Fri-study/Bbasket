@@ -18,7 +18,7 @@
     "yarn": "^1.22.19"
   },
   "scripts": {
-    "start": "GENERATE_SOURCEMAP=false react-scripts start",
+    "start": "set \"GENERATE_SOURCEMAP=false\" && react-scripts start",
     "build": "GENERATE_SOURCEMAP=false react-scripts build",
     "test": "GENERATE_SOURCEMAP=false eact-scripts test",
     "eject": "react-scripts eject"
@@ -44,7 +44,7 @@
   "devDependencies": {
     "autoprefixer": "^10.4.13",
     "postcss": "^8.4.21",
-    "tailwindcss": "^3.2.7",
-    "react-app-rewired": "^2.2.1"
+    "react-app-rewired": "^2.2.1",
+    "tailwindcss": "^3.2.7"
   }
 }

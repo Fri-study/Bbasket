@@ -1,16 +1,27 @@
 import "../componentsCss/addBookMark.css";
-import React, { useState,} from "react";
+import React, { useState, useEffect} from "react";
 import axios from "axios";
 import isEmpty from './Common/CommonFuntion'
 const cheerio = require("cheerio");
 let innerResponseCh = true;
-
+//todo 브런치 사이트 , 동적사이트 크롤링 이슈
 function AddBookMark(){
 
     const [inputURLvalue, setInputURLvale]  = useState("");
     const [data, setData] = useState("");
     const [okRespons,setOkrespons] = useState(false);
+    const [optionData, setoptionData] = useState([]);
     
+//셀렉트박스옵션값이 없는 경우(첫진입)에만 API통신을 한다
+    //todo API통신 여기서 일어남
+    async function fetchOptions() {
+        //테스트값
+        const testVal = [[{'test1' :'테스트폴더명'}, {'test2' : '테스트폴더명2'}], [{'open':'전체공개'}, {'priv' : '비공개'}]];  
+        setoptionData(testVal);
+    }
+    useEffect(() => {
+        fetchOptions();
+    }, []);
 
     //url값이 바뀔때마다 확인
     const urlValueChangeHeandler = (event) => {
@@ -28,7 +39,6 @@ function AddBookMark(){
     const urlKeyDownhandle = (event) =>{
         if(event.key === 'Enter' ) SearchURLHandler();
     }
-    
 
     //버튼 onClick이벤트
     const SearchURLHandler = async () => {
@@ -59,6 +69,18 @@ function AddBookMark(){
             if(isEmpty(scrapedAuthor))scrapedAuthor = $('title').text().replace(/<[^>]*>?/gm, '');;
 
             let scrapedImg = $('img').attr('src');
+            let scrapedTags = $('div.tags > a').map(function() {
+                return $(this).text();
+              }).get();
+
+            //태그는 해시태그를 추가한다
+            let hashtaggedTags = scrapedTags.map(tag => {
+                if (tag.startsWith('#')) {
+                  return tag;
+                } else {
+                  return `#${tag}`;
+                }
+              }).join(' ');
 
             //iframe 화면이라면 내부 url의 것을 가져온다
             let isIframe = $('iframe');
@@ -74,6 +96,7 @@ function AddBookMark(){
             add("scrapedTitle",scrapedTitle);
             add("scrapedAuthor", scrapedAuthor);
             add("scrapedImg", scrapedImg);
+            add("scrapedTags", hashtaggedTags);
             if(innerResponseCh)setOkrespons(true);
 
           } catch (error) {
@@ -86,6 +109,8 @@ function AddBookMark(){
 
     //todo 2. API와 연결할수있게
     //todo 3. 플렉시블하게 (기능완성후에 할것)
+    //todo 동적 셀렉트박스 옵션
+    //todo 이미지 부분 전처리
     return (
         <form> 
         <div className=" w-[850px] h-96 bg-sky-300 m-1 p-2 rounded-md flex flex-wrap">               
@@ -97,12 +122,15 @@ function AddBookMark(){
                 <div id="addBookMarkLeftDiv">
                     <div className="place-content-start items-start flex w-[600px] h-36">                        
                         <div id="theThumbnailDiv" className="w-48 h-28 bg-white m-1 mt-3 rounded-md inline-block">
-                            <img id="theThumbnailImg" className="w-48 h-28 rounded-md" src={okRespons ? data.get("scrapedImg") || '' : ""} alt=""/>
+                            {okRespons 
+                            && <img id="theThumbnailImg" className="w-48 h-28 rounded-md" src={okRespons ? data.get("scrapedImg") || '' : ""} alt=""/>
+                            }
                         </div>
                         <div className="w-96 h-24 inline-block text-left">
                             <input id="theTitle" className="roundOneInput mANDp1  inline" placeholder="원문제목" defaultValue={okRespons ? data.get("scrapedTitle")|| '' : ''}/>
                             <input id="theAuthor" className="roundOneInput mANDp1 inline" placeholder="원문출처" defaultValue={okRespons ? data.get("scrapedAuthor")|| '' : ''}/>
-                            <textarea id="theTags" className="w-96 h-12 mANDp1 rounded-md" type="textarea"  placeholder="#태그"/>
+                            <textarea id="theTags" className="w-96 h-12 mANDp1 rounded-md" type="textarea"  placeholder="#태그" 
+                                defaultValue={okRespons ? data.get("scrapedTags")|| '' : ''}/>
                         </div>
                     </div>
                     <div className="block">
@@ -112,12 +140,25 @@ function AddBookMark(){
             
             <div id="addBookMarkRightDiv" className="w-[200px] h-[280px] rounded-md bg-slate-100">
                 <p className="mANDp1">폴더선택</p>
-                <select id="userFolderSelect" className="h-[26px] w-[100px] mANDp1">
-                    <option>테스트옵션</option>
+                <select id="userFolderSelect" className="h-[26px] w-[120px] mANDp1">
+                    { !isEmpty(optionData) 
+                        && 
+                        optionData[0].map((map, index) => {
+                        const key = Object.keys(map)[0];
+                        const value = map[key]; 
+                        return <option key={index} value={key}>{value}</option>;
+                    })}
+                    
                 </select>
                 <p className="mANDp1">공개선택</p>
-                <select id="userFolderSelect" className="h-[26px] w-[100px] mANDp1">
-                    <option>테스트옵션^^*</option>
+                <select id="userFolderSelect" className="h-[26px] w-[120px] mANDp1">
+                { !isEmpty(optionData) 
+                        && 
+                        optionData[1].map((map, index) => {
+                        const key = Object.keys(map)[0];
+                        const value = map[key]; 
+                        return <option key={index} value={key}>{value}</option>;
+                    })}
                 </select>
             </div>  
         </div>

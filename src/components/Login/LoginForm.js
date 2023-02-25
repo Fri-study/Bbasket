@@ -66,7 +66,6 @@ function LoginForm() {
           </div>
           <div className="space-x-6">
             {/* 각 사이트 Oauth 클라이언트 필요 */}
-            {/* 간편로그인과 그냥 로그인을 묶어야 하는지 아닌지 아직 모르겠습니다 */}
             <button>
               <img
                 src="/images/google-icon-48x48.png"

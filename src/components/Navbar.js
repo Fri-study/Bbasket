@@ -7,10 +7,13 @@ function Navbar() {
   return (
     <div>
       <nav id="header">
-        <div class="w-full flex items-center justify-between mt-0 px-6 py-2 w-full z-30 top-10 py-1 bg-white border-b border-blue-400 mt-24">
-          <label for="menu-toggle" class="cursor-pointer md:hidden block">
+        <div className="w-full flex items-center justify-between mt-0 px-6 py-2 w-full z-30 top-10 py-1 bg-white border-b border-blue-400 mt-24">
+          <label
+            htmlFor="menu-toggle"
+            className="cursor-pointer md:hidden block"
+          >
             <svg
-              class="fill-current text-blue-600"
+              className="fill-current text-blue-600"
               xmlns="http://www.w3.org/2000/svg"
               width="20"
               height="20"
@@ -22,19 +25,17 @@ function Navbar() {
           </label>
 
           <div
-            class="hidden md:flex md:items-center md:w-auto w-full order-3 md:order-1"
+            className="hidden md:flex md:items-center md:w-auto w-full order-3 md:order-1"
             id="menu"
           >
             <nav>
-              <ul class="md:flex items-center justify-between text-base text-blue-600 pt-4 md:pt-0">
+              <ul className="md:flex items-center justify-between text-base text-blue-600 pt-4 md:pt-0">
                 <li>
-                  <Link to="/">
-                    <a
-                      class="inline-block no-underline hover:text-black font-medium text-lg py-2 px-4 lg:-ml-2"
-                      href="#"
-                    >
-                      Home
-                    </a>
+                  <Link
+                    to="/"
+                    className="inline-block no-underline hover:text-black font-medium text-lg py-2 px-4 lg:-ml-2"
+                  >
+                    Home
                   </Link>
                 </li>
               </ul>
@@ -42,18 +43,18 @@ function Navbar() {
           </div>
 
           <div
-            class="order-2 md:order-3 flex flex-wrap items-center justify-end mr-0 md:mr-4"
+            className="order-2 md:order-3 flex flex-wrap items-center justify-end mr-0 md:mr-4"
             id="nav-content"
           >
-            <div class="auth flex items-center w-full md:w-full">
+            <div className="auth flex items-center w-full md:w-full">
               <Link to={"/AddBook"}>
-                <button class="bg-transparent text-gray-800  p-2 rounded border border-gray-300 mr-4 hover:bg-gray-100 hover:text-gray-700">
+                <button className="bg-transparent text-gray-800  p-2 rounded border border-gray-300 mr-4 hover:bg-gray-100 hover:text-gray-700">
                   {/* 임시 기능  후에 로그인 시에 보이게 하기*/}
                   글쓰기
                 </button>
               </Link>
               <Link to="/Login">
-                <button class="bg-blue-500 text-gray-200  p-2 rounded  hover:bg-blue-700 hover:text-gray-100">
+                <button className="bg-blue-500 text-gray-200  p-2 rounded  hover:bg-blue-700 hover:text-gray-100">
                   로그인
                 </button>
               </Link>

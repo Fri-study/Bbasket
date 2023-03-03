@@ -47,7 +47,7 @@ function LoginForm() {
             placeholder="비밀번호를 입력하세요"
             id="password"
             value={inputPw}
-            onClick={handleInputPw}
+            onChange={handleInputPw}
             className="rounded-lg border-4 w-full px-4 py-1"
           />
         </div>

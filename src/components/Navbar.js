@@ -7,7 +7,7 @@ function Navbar() {
   return (
     <div>
       <nav id="header">
-        <div className="w-full flex items-center justify-between mt-0 px-6 py-2 w-full z-30 top-10 py-1 bg-white border-b border-blue-400 mt-24">
+        <div className="w-full flex items-center justify-between mt-0 px-6 py-2 w-full z-30 top-10 py-1 bg-white border-b border-blue-400 ">
           <label
             htmlFor="menu-toggle"
             className="cursor-pointer md:hidden block"
@@ -53,7 +53,7 @@ function Navbar() {
                   글쓰기
                 </button>
               </Link>
-              <Link to="/Login">
+              <Link to="/SignIn">
                 <button className="bg-blue-500 text-gray-200  p-2 rounded  hover:bg-blue-700 hover:text-gray-100">
                   로그인
                 </button>

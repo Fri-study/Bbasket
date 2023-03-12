@@ -3,8 +3,6 @@ import Collection from './Collection';
 import SearchBar from './SearchBar';
 import SearchMain from './SearchMain';
 import { useState } from 'react';
-import AddBookMark from './AddBookMark';
-import Modal from 'react-modal';
 
 function Main(props){
 
@@ -38,17 +36,6 @@ function Main(props){
         forSearching(searchTerm, () =>{state.isMain === 'main' && changtoSearch(searchTerm) });
     }
 
-    //모달창으로 등록화면 테스트 (네이게이션 생긴 후에 삭제됩니다)
-    const [showModal, setShowModal] = useState(false);
-    const testModal = () => {
-        setShowModal(true);
-    };
-    const testModalClose = ()=>{
-        setShowModal(false);
-    }
-    Modal.setAppElement('#root');
-
-
   return (
     <div>
         {/* 기본메인화면 진입시 */}
@@ -70,19 +57,6 @@ function Main(props){
                 {/*todo  설명이미지가 들어갈만한 자리에 샘플가안 박스 */}
                 {/* <div className='mt-[50px] border-2 bg-slate-400 h-[400px] '> 사용 설명, 플랫폼 설명 이미지가 들어가면 좋겠어요 </div> */}
 
-
-                {/* 테스트 노출 */}
-                <button onClick={testModal} className='bg-slate-200 w-[220px] h-[30px] border-4 border-cyan-900'> 북마크 등록 페이지 테스트 버튼</button>
-                <Modal
-                    isOpen={showModal}
-                    onRequestClose={testModalClose}
-                    contentLabel="Example Modal"
-                    appElement={document.getElementById('root')}>
-                        <h4>개발용 프록시 사용을 위해 아래 링크에서 버튼을 눌러주세요(하루에 한번정도만 누르면 되요)</h4>
-                        <a className='bg-slate-200 w-[200px] h-[30px] border-4 border-cyan-900' href='https://cors-anywhere.herokuapp.com/'> 개발용프록시 활성화하러가기</a>
-                    <AddBookMark/>
-                </Modal>
-                
             </div>
         }
 

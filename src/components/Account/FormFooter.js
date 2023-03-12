@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 function LoginFooter() {
   return (
     <div>
-      <div class="p-10 pb-3 rounded-b-lg text-blue-500 bg-white flex items-center justify-between">
+      <div className="p-10 pb-3 rounded-b-lg text-blue-500 bg-white flex items-center justify-between">
         <Link
           to="#"
           className="inline-block hover:text-blue-900 align-baseline  text-sm"

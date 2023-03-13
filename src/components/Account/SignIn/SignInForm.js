@@ -111,12 +111,13 @@ function LoginForm() {
         >
           로그인
         </button>
-        {/* 간편로그인 부분 */}
-        <div className="text-center ">
-          <div className="flex items-center justify-center my-6 space-x-2">
-            <span className="w-16 h-px bg-gray-200"></span>
-            <span className="font-normal text-gray-400">간편 로그인</span>
-            <span className="w-16 h-px bg-gray-200"></span>
+
+        <div className=" text-center">
+          <div className="flex items-center justify-center space-x-2 my-6">
+            <span className="h-px w-16 bg-gray-200"></span>
+            <span className="text-gray-400 font-normal">간편 로그인</span>
+            <span className="h-px w-16 bg-gray-200"></span>
+
           </div>
           <div className="space-x-6">
             {/* 각 사이트 Oauth 클라이언트 필요 */}

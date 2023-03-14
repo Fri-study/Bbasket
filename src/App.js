@@ -6,7 +6,6 @@ import Navbar from "./components/Navbar";
 import Home from "./components/Pages/Home";
 import Tos from "./components/Pages/Tos";
 import Privacy from "./components/Pages/Privacy";
-import KakaoSignIn from "./components/Account/KakaoSignIn";
 
 function App() {
   return (

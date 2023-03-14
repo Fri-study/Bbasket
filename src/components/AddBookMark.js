@@ -2,6 +2,9 @@ import "../componentsCss/addBookMark.css";
 import React, { useState, useEffect} from "react";
 import axios from "axios";
 import isEmpty from './Common/CommonFuntion'
+import Navbar from "./Navbar";
+import Footer from "./Footer";
+
 const cheerio = require("cheerio");
 let innerResponseCh = true;
 //todo 브런치 사이트 , 동적사이트 크롤링 이슈
@@ -108,39 +111,44 @@ function AddBookMark(){
 
 
     //todo 2. API와 연결할수있게
-    //todo 3. 플렉시블하게 (기능완성후에 할것)
-    //todo 동적 셀렉트박스 옵션
-    //todo 이미지 부분 전처리
     return (
         <form> 
-        <div className=" w-[850px] h-96 bg-sky-300 m-1 p-2 rounded-md flex flex-wrap">               
-            <div id="addBookMarkTopDiv" className="w-[600px]">
-                <input id="addBookMarkURL" value={inputURLvalue} onChange={urlValueChangeHeandler} onKeyDown={urlKeyDownhandle} className="w-[520px] h-9 mANDp1 rounded-md" type="text" placeholder="북마크할 URL주소를 입력하세요"></input>
-                <button id="searchURLbtn" onClick={SearchURLHandler} className="s_btn text-cyan-50 text-xs" type="button">URL찾기</button>
-                <div className="w-[820px] h-0.5 my-3 rounded-md bg-gray-200"></div>
-            </div>    
-                <div id="addBookMarkLeftDiv">
-                    <div className="place-content-start items-start flex w-[600px] h-36">                        
-                        <div id="theThumbnailDiv" className="w-48 h-28 bg-white m-1 mt-3 rounded-md inline-block">
-                            {okRespons 
-                            && <img id="theThumbnailImg" className="w-48 h-28 rounded-md" src={okRespons ? data.get("scrapedImg") || '' : ""} alt=""/>
-                            }
+            <Navbar/>
+            <h4>개발용 프록시 사용을 위해 아래 링크에서 버튼을 눌러주세요(하루에 한번정도만 누르면 OK)</h4>
+            <a className='bg-slate-200 w-[200px] h-[30px] border-4 border-cyan-900' href='https://cors-anywhere.herokuapp.com/'> 개발용프록시 활성화하러가기</a>
+            {/* 위에는 테스트용 입니다 */}
+
+            <div className="w-full flex flex-wrap justify-centert text-center justify-center mt-[20px]"> 
+                <div className=" w-[600px] h-96 bg-blue-400 m-1 p-2 rounded-md flex flex-wrap">               
+                    <div id="addBookMarkTopDiv" className="w-[600px]">
+                        <input id="addBookMarkURL" value={inputURLvalue} onChange={urlValueChangeHeandler} onKeyDown={urlKeyDownhandle} className="w-[500px] h-9 mANDp1 rounded-lg border-4" type="text" placeholder="북마크할 URL주소를 입력하세요"></input>
+                        <button id="searchURLbtn" onClick={SearchURLHandler} className="s_btn text-cyan-50 text-xs" type="button">URL찾기</button>
+                        <div className="w-full h-0.5 my-3 rounded-md bg-gray-200"></div>
+                    </div>    
+                    <div id="addBookMarkLeftDiv">
+                        <div className="place-content-start items-start flex w-[600px] h-36">                        
+                            <div id="theThumbnailDiv" className="w-48 h-28 bg-white m-1 mt-3 rounded-md inline-block">
+                                {okRespons 
+                                && <img id="theThumbnailImg" className="w-48 h-28 rounded-md" src={okRespons ? data.get("scrapedImg") || '' : ""} alt=""/>
+                                }
+                            </div>
+                            <div className="w-96 h-24 inline-block text-left">
+                                <input id="theTitle" className="roundOneInput border-4 mANDp1  inline" placeholder="원문제목" defaultValue={okRespons ? data.get("scrapedTitle")|| '' : ''}/>
+                                <input id="theAuthor" className="roundOneInput border-4 mANDp1 inline" placeholder="원문출처" defaultValue={okRespons ? data.get("scrapedAuthor")|| '' : ''}/>
+                                <textarea id="theTags" className="w-[370px] h-12 border-4 mANDp1 rounded-lg" type="textarea"  placeholder="#태그" 
+                                    defaultValue={okRespons ? data.get("scrapedTags")|| '' : ''}/>
+                            </div>
                         </div>
-                        <div className="w-96 h-24 inline-block text-left">
-                            <input id="theTitle" className="roundOneInput mANDp1  inline" placeholder="원문제목" defaultValue={okRespons ? data.get("scrapedTitle")|| '' : ''}/>
-                            <input id="theAuthor" className="roundOneInput mANDp1 inline" placeholder="원문출처" defaultValue={okRespons ? data.get("scrapedAuthor")|| '' : ''}/>
-                            <textarea id="theTags" className="w-96 h-12 mANDp1 rounded-md" type="textarea"  placeholder="#태그" 
-                                defaultValue={okRespons ? data.get("scrapedTags")|| '' : ''}/>
+                        <div className="block">
+                            <textarea type="textarea" id="newMemo" className="w-[570px] h-[130px] border-4 mANDp1 rounded-lg block" placeholder="북마크에대한 메모를 남겨주세요"/>
                         </div>
-                    </div>
-                    <div className="block">
-                        <textarea type="textarea" id="newMemo" className="w-[585px] h-[130px] mANDp1 rounded-md block" placeholder="북마크에대한 메모를 남겨주세요"/>
-                    </div>
+                    </div>  
                 </div>
-            
-            <div id="addBookMarkRightDiv" className="w-[200px] h-[280px] rounded-md bg-slate-100">
+
+
+            <div id="addBookMarkRightDiv" className="w-[200px] h-[200px] m-1 p-2 rounded-md bg-slate-100">
                 <p className="mANDp1">폴더선택</p>
-                <select id="userFolderSelect" className="h-[26px] w-[120px] mANDp1">
+                <select id="userFolderSelect" className="h-[36px] w-[120px] border-4 mANDp1 rounded-lg">
                     { !isEmpty(optionData) 
                         && 
                         optionData[0].map((map, index) => {
@@ -151,7 +159,7 @@ function AddBookMark(){
                     
                 </select>
                 <p className="mANDp1">공개선택</p>
-                <select id="userFolderSelect" className="h-[26px] w-[120px] mANDp1">
+                <select id="userFolderSelect" className="h-[36px] w-[120px] border-4 mANDp1 rounded-lg">
                 { !isEmpty(optionData) 
                         && 
                         optionData[1].map((map, index) => {
@@ -160,8 +168,9 @@ function AddBookMark(){
                         return <option key={index} value={key}>{value}</option>;
                     })}
                 </select>
-            </div>  
-        </div>
+            </div>
+        </div>  
+        <Footer/>
     </form>
     );
 

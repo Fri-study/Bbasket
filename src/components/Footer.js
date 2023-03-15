@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function Footer(props) {
+function Footer() {
   return (
     <div>
-      <div className="w-full mx-auto position   bottom-0">
+      <div className="absolute bottom-0 w-full mx-auto">
         <footer className="p-4 bg-white border-t border-blue-400 md:flex md:items-center md:justify-between md:p-6 dark:bg-gray-800">
           <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">
             © 2023{" "}

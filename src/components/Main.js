@@ -97,7 +97,7 @@ function Main(props) {
       {state.isMain === "main" && (
         <div>
           <div className="flex justify-center">
-            <div className="w-3/4 self-center">
+            <div className="self-center w-3/4">
               <Slider />
             </div>
           </div>

@@ -6,10 +6,11 @@ import Navbar from "../Navbar";
 function Home() {
   return (
     <div>
-      {/* 완전히 합치기전이라 임시적으로 만들었습니다. */}
       <Navbar />
       <Main />
-      <Footer />
+      <div className="absolute bottom-0 left-0 right-0 w-full">
+        <Footer />
+      </div>
     </div>
   );
 }

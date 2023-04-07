@@ -3,10 +3,10 @@ import React from "react";
 function LoginTemple({ children }) {
   return (
     <div>
-      <div className="relative  sm:flex sm:flex-row  justify-center bg-transparent ">
-        <div className="flex-col flex self-center lg:px-14 sm:max-w-4xl xl:max-w-md  z-10">
-          <div className="self-start hidden lg:flex flex-col  text-gray-300">
-            <h1 className="my-3 font-semibold text-4xl">Welcome BBASKET</h1>
+      <div className="justify-center bg-transparent  sm:flex sm:flex-row">
+        <div className="z-10 flex flex-col self-center lg:px-14 sm:max-w-4xl xl:max-w-md">
+          <div className="flex-col self-start hidden text-gray-300 lg:flex">
+            <h1 className="my-3 text-4xl font-semibold">Welcome BBASKET</h1>
             <p className="pr-3 text-sm opacity-75">
               Use BBASKET to conveniently use bookmarks. Quickly see what's been
               saved with large images and tags. You can organize, search, and
@@ -14,8 +14,8 @@ function LoginTemple({ children }) {
             </p>
           </div>
         </div>
-        <div className="flex justify-center self-center  z-10">
-          <div className="w-96 relative  rounded-2xl bg-white  drop-shadow-md shadow-gray-50 m-0 m-auto mt-24 mb-8 flex flex-col ">
+        <div className="z-10 flex self-center justify-center">
+          <div className="relative flex flex-col m-auto mt-24 mb-8 bg-white w-96 rounded-2xl drop-shadow-md shadow-gray-50 ">
             {children}
           </div>
         </div>

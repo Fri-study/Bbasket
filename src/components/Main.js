@@ -1,3 +1,4 @@
+
 import Slider from './SliderBanner';
 import Collection from './Collection';
 import SearchBar from './SearchBar';
@@ -66,10 +67,12 @@ function Main(props){
             <div className='m-[20px] mt-[70px]'>
                 <Collection isMain={state.isMain} results={testVal}/>
             </div>
+
         }
 
         {/* 검색화면 진입시 */}
         {state.isMain ==='searchmain' && <SearchMain isMain={state.isMain} isShow={state.isShow} results={testVal} onSerchActed={handleSearching} isValue={state.isValue}/>}
+
 
     </div>
   );

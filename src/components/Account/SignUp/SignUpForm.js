@@ -2,47 +2,53 @@ import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 
 function LoginForm() {
-  const [inputNickname, setInputNickname] = useState("");
-  const [inputEmail, setInputEmail] = useState("");
-  const [inputPw, setInputPw] = useState("");
-  const [inputConfirmPw, setInputConfirmPw] = useState("");
+  const [userName, setUserName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [password2, setPassword2] = useState("");
 
-  const [nicknameValid, setNicknameValid] = useState(false);
+  const [userNameValid, setUserNameValid] = useState(false);
   const [emailValid, setEmailValid] = useState(false);
-  const [pwValid, setPwValid] = useState(false);
-  const [confirmPwValid, setConfirmPwValid] = useState(false);
+  const [passwordValid, setPasswordValid] = useState(false);
+  const [password2Valid, setPassword2Valid] = useState(false);
   const [checkBoxActive, setCheckboxActive] = useState(false);
   const [notAllow, setNotAllow] = useState(true);
 
   useEffect(() => {
     if (
-      nicknameValid &&
+      userNameValid &&
       emailValid &&
-      pwValid &&
-      confirmPwValid &&
+      passwordValid &&
+      password2Valid &&
       checkBoxActive
     ) {
       setNotAllow(false);
       return;
     }
     setNotAllow(true);
-  }, [nicknameValid, emailValid, pwValid, confirmPwValid, checkBoxActive]);
+  }, [
+    userNameValid,
+    emailValid,
+    passwordValid,
+    password2Valid,
+    checkBoxActive,
+  ]);
 
-  const handleInputNickname = (e) => {
-    setInputNickname(e.target.value);
+  const handleUserName = (e) => {
+    setUserName(e.target.value);
     //  임시 유효성 검사 - 추후 정한 로직이 있다면 알려주세요
     const nicknameRegex =
       /^(?=.*[a-zA-z])(?=.*[ㄱ-ㅎ|ㅏ-ㅣ|가-힣])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+])(?!.*[^a-zA-z0-9$`~!@$!%*#^?&\\(\\)\-_=+]).{8,20}$/;
     if (nicknameRegex.test(e.target.value)) {
-      setNicknameValid(true);
+      setUserNameValid(true);
     } else {
-      setNicknameValid(false);
+      setUserNameValid(false);
     }
   };
 
   // input data의 변화가 있을 때마다 value 값을 변경해서 useState
-  const handleInputEmail = (e) => {
-    setInputEmail(e.target.value);
+  const handleEmail = (e) => {
+    setEmail(e.target.value);
     // 임시 유효성 검사 - 추후 정한 로직이 있다면 알려주세요
     const emailRegex = /^\S+@\S+\.\S+$/;
     if (emailRegex.test(e.target.value)) {
@@ -52,27 +58,27 @@ function LoginForm() {
     }
   };
 
-  const handleInputPw = (e) => {
-    setInputPw(e.target.value);
+  const handlePassword = (e) => {
+    setPassword(e.target.value);
     // 임시 유효성 검사 - 추후 정한 로직이 있다면 알려주세요
     const pwRegex =
       /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+])(?!.*[^a-zA-z0-9$`~!@$!%*#^?&\\(\\)\-_=+]).{8,20}$/;
     if (pwRegex.test(e.target.value)) {
-      setPwValid(true);
+      setPasswordValid(true);
     } else {
-      setPwValid(false);
+      setPasswordValid(false);
     }
   };
 
-  const handleInputConfirmPw = (e) => {
-    setInputConfirmPw(e.target.value);
+  const handlePassword2 = (e) => {
+    setPassword2(e.target.value);
     // 임시 유효성 검사 - 추후 정한 로직이 있다면 알려주세요
     const cpnfirmPwRegex =
       /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+])(?!.*[^a-zA-z0-9$`~!@$!%*#^?&\\(\\)\-_=+]).{8,20}$/;
     if (cpnfirmPwRegex.test(e.target.value)) {
-      setConfirmPwValid(true);
+      setPassword2Valid(true);
     } else {
-      setConfirmPwValid(false);
+      setPassword2Valid(false);
     }
   };
 
@@ -87,13 +93,7 @@ function LoginForm() {
 
   // Login 버튼 클릭 이벤트
   const onClickSignUp = () => {
-    if (
-      inputNickname &&
-      inputEmail &&
-      inputPw &&
-      inputConfirmPw &&
-      checkBoxActive === true
-    ) {
+    if (userName && email && password && password2 && checkBoxActive === true) {
       alert("회원가입에 성공했습니다.");
     } else {
       alert("이미 등록된 회원입니다.  ");
@@ -119,8 +119,8 @@ function LoginForm() {
           <input
             placeholder="이름을 입력하세요"
             id="id"
-            value={inputNickname}
-            onChange={handleInputNickname}
+            value={userName}
+            onChange={handleUserName}
             className="w-full px-4 py-1 border-4 rounded-lg"
           />
         </div>
@@ -130,12 +130,12 @@ function LoginForm() {
           <input
             placeholder="이메일를 입력하세요"
             id="id"
-            value={inputEmail}
-            onChange={handleInputEmail}
+            value={email}
+            onChange={handleEmail}
             className="w-full px-4 py-1 border-4 rounded-lg"
           />
           <div className="text-xs text-red-500 ">
-            {!emailValid && inputEmail.length > 0 && (
+            {!emailValid && email.length > 0 && (
               <div>올바른 이메일을 입력해주세요.</div>
             )}
           </div>
@@ -146,12 +146,12 @@ function LoginForm() {
           <input
             placeholder="비밀번호를 입력하세요"
             id="password"
-            value={inputPw}
-            onChange={handleInputPw}
+            value={password}
+            onChange={handlePassword}
             className="w-full px-4 py-1 border-4 rounded-lg"
           />
           <div className="text-xs text-red-500 ">
-            {!pwValid && inputPw.length > 0 && (
+            {!passwordValid && password.length > 0 && (
               <div>영문, 숫자, 특수문자 포함 8자 이상 입력해주세요.</div>
             )}
           </div>
@@ -161,19 +161,19 @@ function LoginForm() {
           <input
             placeholder="비밀번호를 확인해 주세요"
             id="password"
-            value={inputConfirmPw}
-            onChange={handleInputConfirmPw}
+            value={password2}
+            onChange={handlePassword2}
             className="w-full px-4 py-1 border-4 rounded-lg"
           />
           <div className="text-xs text-red-500 ">
-            {inputPw !== inputConfirmPw && (
+            {password !== password2 && (
               <div>비밀번호와 비밀번호 확인이 같지 않습니다.</div>
             )}
           </div>
         </div>
         {/* 회원가입 체크박스 */}
         <div className="pt-4 text-center ">
-          <div className="text-xs text-gray-500 ">
+          <div className="text-[10px] text-gray-500 ">
             가입 시, 통합 계정으로 비바스켓이 제공하는 서비스를 모두 이용하실 수
             있습니다.
             <NavLink to="/Tos" className="text-blue-500 hover:text-blue-700">
@@ -192,6 +192,7 @@ function LoginForm() {
             type="checkbox"
             value={checkBoxActive}
             onChange={isCheckBoxClicked}
+            className="text-xs"
           />
           <label>모두 동의 합니다.</label>
         </div>
@@ -205,32 +206,6 @@ function LoginForm() {
         >
           회원가입
         </button>
-        <div className=" text-center">
-          <div className="flex items-center justify-center space-x-2 my-6">
-            <span className="h-px w-16 bg-gray-200"></span>
-            <span className="text-gray-400 font-normal">간편 회원가입</span>
-            <span className="h-px w-16 bg-gray-200"></span>
-          </div>
-          <div className="space-x-6">
-            {/* 각 사이트 Oauth 클라이언트 필요 */}
-            <button>
-              <img
-                src="/images/google-icon-48x48.png"
-                alt=""
-                className="rounded-lg"
-              />
-              <div>Google</div>
-            </button>
-            <button>
-              <img
-                src="/images/kakao-icon-48x48.png"
-                alt=""
-                className="rounded-lg"
-              />
-              <div>KaKao</div>
-            </button>
-          </div>
-        </div>
       </div>
     </div>
   );

@@ -4,6 +4,7 @@ import FormFooter from "../FormFooter";
 import SignInForm from "./SignInForm";
 import FormTemple from "../FormTemple";
 import FormNar from "../FormNar";
+import SocialSingInForm from "../SocialSingIn/SocialSingInForm";
 
 function Login() {
   return (
@@ -14,6 +15,7 @@ function Login() {
         {/*로그인 박스 */}
         <FormNar /> {/*로그인 회원가입 버튼 */}
         <SignInForm /> {/*로그인 폼 */}
+        <SocialSingInForm /> {/* 간편 로그인 폼 */}
         <FormFooter /> {/*로그인 회원가입 개인정보 */}
       </FormTemple>
     </div>

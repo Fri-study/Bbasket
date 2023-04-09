@@ -7,12 +7,12 @@ function PolicyHeader({ children }) {
     "px-4 py-2 -mb-px font-semibold border-b-2 border-sky-500 rounded-t ";
   return (
     <div>
-      <header className="w-full lg,xl:px-48 bg-sky-500 p-10">
+      <header className="w-full p-10 xl:px-48 bg-sky-500">
         <h3 className="px-4 text-2xl text-white ">
           <strong>이용약관 및 개인정보 처리방침</strong>
         </h3>
       </header>
-      <div className="inline-flex w-full px-10 pt-2">
+      <div className="inline-flex w-full p-10 pt-2 xl:px-48">
         <NavLink
           to="/Tos"
           className={({ isActive }) => (isActive ? activeCSS : nomalCSS)}
